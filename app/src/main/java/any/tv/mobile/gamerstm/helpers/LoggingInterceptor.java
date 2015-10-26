@@ -21,13 +21,23 @@ public class LoggingInterceptor implements Interceptor {
                 newRequest;
 
         URI urlReqeust = request.uri();
-        Uri newUrlRequest = new Uri.Builder()
+
+        String[] queries = urlReqeust.getRawQuery() != null ? urlReqeust.getRawQuery().split("&") : null;
+        Uri.Builder builder = new Uri.Builder()
                 .scheme(request.isHttps() ? "https" : "http")
                 .encodedAuthority(urlReqeust.getRawAuthority())
-                .path(urlReqeust.getPath())
-                .query(urlReqeust.getQuery())
-                .appendQueryParameter("android", "1")
-                .build();
+                .path(urlReqeust.getRawPath())
+                //.query(urlReqeust.getRawQuery())
+                .appendQueryParameter("android", "1");
+
+        if (queries != null) {
+            for (String query : queries) {
+                String[] values = query.split("=");
+                builder.appendQueryParameter(values[0], values.length > 1 ? values[1] : null);
+            }
+        }
+
+        Uri newUrlRequest = builder.build();
 
         newRequest = request.newBuilder().url(new URL(newUrlRequest.toString())).build();
 

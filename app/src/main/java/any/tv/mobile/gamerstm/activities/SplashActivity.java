@@ -1,18 +1,19 @@
 package any.tv.mobile.gamerstm.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
 import any.tv.mobile.gamerstm.Application;
 import any.tv.mobile.gamerstm.R;
-import any.tv.mobile.gamerstm.models.RecommendedGame;
+import any.tv.mobile.gamerstm.helpers.ActivityHelper;
 import any.tv.mobile.gamerstm.models.Slider;
 import retrofit.Call;
 import retrofit.Callback;
@@ -20,11 +21,12 @@ import retrofit.Response;
 
 
 public class SplashActivity extends ActionBarActivity {
-
+    Context c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        c = this;
         Log.d("SPLASHACTIVITY", "WILL ENQUEUE");
         Call<List<Slider>> sliders =  ((Application) getApplication()).getGamersService().sliders();
         sliders.enqueue(new Callback<List<Slider>>() {
@@ -37,26 +39,13 @@ public class SplashActivity extends ActionBarActivity {
                 while(i.hasNext()) {
                     i.next().save();
                 }
+
+                ActivityHelper.startActivity(HomeActivity.class, c);
             }
 
             @Override
             public void onFailure(Throwable t) {
                 Log.d("SPLASHACTIVITY", "ERROR LA " + t.getMessage());
-            }
-        });
-
-        Call<List<RecommendedGame>> recommendedGames = ((Application) getApplication()).getGamersService().recommendedGames();
-        recommendedGames.enqueue(new Callback<List<RecommendedGame>>() {
-            @Override
-            public void onResponse(Response<List<RecommendedGame>> response) {
-                try {
-                    Log.d("HELLO", response.raw().body().string());
-                } catch (IOException e) { Log.d("OLALA", "ERROR BODY"); }
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-
             }
         });
     }

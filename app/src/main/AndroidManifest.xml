@@ -3,12 +3,11 @@
     package="any.tv.mobile.gamerstm" >
 
     <application
+        android:name=".Application"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name="any.tv.mobile.gamerstm.Application">
-
+        android:theme="@style/AppTheme" >
         <uses-permission android:name="android.permission.INTERNET" />
         <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -26,6 +25,10 @@
         <activity
             android:name=".activities.HomeActivity"
             android:label="@string/title_activity_home" >
+        </activity>
+        <activity
+            android:name=".activities.YoutubePlayerActivity"
+            android:label="@string/title_activity_youtube_player" >
         </activity>
     </application>
 

@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by adin234 on 28/09/2015.
  */
-public class RecommendedGame extends BaseModel {
+public class VideoPile extends BaseModel {
     private String gamers_mobile_android_id;
     private String game_id;
     private String image_source;
@@ -20,7 +20,7 @@ public class RecommendedGame extends BaseModel {
     @Ignore
     private List<GamersTranslation> game_name;
 
-    public RecommendedGame() {}
+    public VideoPile() {}
 
     public String getGamers_mobile_android_id() {
         return gamers_mobile_android_id;

@@ -31,7 +31,7 @@ public class Application extends android.app.Application {
         client.interceptors().add(new LoggingInterceptor());
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.1.103:3000/mobile_api/")
+                .baseUrl("http://10.10.13.249:3000/mobile_api/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

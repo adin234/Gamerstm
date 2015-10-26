@@ -1,6 +1,23 @@
 package any.tv.mobile.gamerstm.models;
 
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.Picasso;
+
 import java.util.Date;
+
+import any.tv.mobile.gamerstm.R;
+import any.tv.mobile.gamerstm.activities.BaseActivity;
+import any.tv.mobile.gamerstm.activities.YoutubePlayerActivity;
+import any.tv.mobile.gamerstm.helpers.ActivityHelper;
 
 /**
  * Created by adin234 on 28/09/2015.
@@ -14,10 +31,12 @@ public class Video extends BaseModel {
     private String video_title;
     private String owner;
     private String channel_id;
+    private String description;
+    private String engtitle;
     private int views;
     private int comments;
     private int likes;
-    private Date published_at;
+    private String published_at;
     private boolean featured;
 
     public Video() {}
@@ -47,7 +66,7 @@ public class Video extends BaseModel {
     }
 
     public String getVideo_id() {
-        return video_id;
+        return video_id != null && !video_id.equals("") ? video_id : gamers_mobile_android_id;
     }
 
     public void setVideo_id(String video_id) {
@@ -110,11 +129,11 @@ public class Video extends BaseModel {
         this.likes = likes;
     }
 
-    public Date getPublished_at() {
+    public String getPublished_at() {
         return published_at;
     }
 
-    public void setPublished_at(Date published_at) {
+    public void setPublished_at(String published_at) {
         this.published_at = published_at;
     }
 
@@ -124,5 +143,54 @@ public class Video extends BaseModel {
 
     public void setFeatured(boolean featured) {
         this.featured = featured;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setÐescription(String description) {
+        this.description = description;
+    }
+
+    public String getEngtitle() {
+        return engtitle;
+    }
+
+    public void setEngtitle(String engtitle) {
+        this.engtitle = engtitle;
+    }
+
+    public View getView(final Context c, View convertView, ViewGroup parent) {
+        View row = convertView;
+        final Video self = this;
+
+        if (row == null) {
+            LayoutInflater vi;
+            vi = LayoutInflater.from(c);
+            row = vi.inflate(R.layout.home_category_item, null, false);
+        }
+
+        final ImageView thumbView = (ImageView) row.findViewById(R.id.videoThumb);
+
+        Picasso.with(c).load(getImage_source()).into(thumbView);
+
+        ((TextView) row.findViewById(R.id.titleText)).setText(this.getVideo_title());
+        ((TextView) row.findViewById(R.id.ownerText)).setText(this.getOwner());
+        ((TextView) row.findViewById(R.id.viewsText)).setText(this.getViews()+ " Views |");
+        ((TextView) row.findViewById(R.id.commentsText)).setText(this.getComments() + " Comments");
+
+        row.findViewById(R.id.shareButton).setOnClickListener((BaseActivity) c);
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle b = new Bundle();
+                b.putSerializable("video", self);
+                ActivityHelper.startActivity(YoutubePlayerActivity.class, c, b);
+            }
+        });
+
+
+        return row;
     }
 }
