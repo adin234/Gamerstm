@@ -11,6 +11,7 @@ import java.util.Date;
  */
 public class BaseModel extends SugarRecord implements Serializable {
     protected Date createdDate;
+    protected transient long id;
 
     public long save() {
         createdDate = new Date();

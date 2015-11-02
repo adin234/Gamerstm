@@ -30,6 +30,22 @@
             android:name=".activities.YoutubePlayerActivity"
             android:label="@string/title_activity_youtube_player" >
         </activity>
+        <activity
+            android:name=".activities.GamesListActivity"
+            android:label="@string/title_activity_games_list" >
+        </activity>
+        <activity
+            android:name=".activities.GameVideosActivity"
+            android:label="@string/title_activity_game_videos"
+            android:parentActivityName=".activities.GamesListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="any.tv.mobile.gamerstm.activities.GamesListActivity" />
+        </activity>
+        <activity
+            android:name=".activities.StreamersListActivity"
+            android:label="@string/title_activity_streamers_list">
+        </activity>
     </application>
 
 </manifest>

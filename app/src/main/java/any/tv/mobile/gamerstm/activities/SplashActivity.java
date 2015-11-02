@@ -32,13 +32,13 @@ public class SplashActivity extends ActionBarActivity {
         sliders.enqueue(new Callback<List<Slider>>() {
             @Override
             public void onResponse(Response<List<Slider>> response) {
-                Iterator<Slider> i = response.body().iterator();
+                /*Iterator<Slider> i = response.body().iterator();
 
                 Slider.deleteAll(Slider.class);
 
                 while(i.hasNext()) {
                     i.next().save();
-                }
+                }*/
 
                 ActivityHelper.startActivity(HomeActivity.class, c);
             }

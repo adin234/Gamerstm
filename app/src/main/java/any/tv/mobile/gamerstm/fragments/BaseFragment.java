@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import any.tv.mobile.gamerstm.Application;
+import any.tv.mobile.gamerstm.modules.CommentsService;
 import any.tv.mobile.gamerstm.modules.GamersService;
 
 /**
@@ -69,5 +70,9 @@ public class BaseFragment extends Fragment {
 
     public GamersService getGamersService() {
         return ((Application) getActivity().getApplication()).getGamersService();
+    }
+
+    public CommentsService getCommentsService() {
+        return ((Application) getActivity().getApplication()).getCommentsService();
     }
 }

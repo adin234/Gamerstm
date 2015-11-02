@@ -3,9 +3,17 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_home">HomeActivity</string>
-    <string name="title_activity_youtube_player">YoutubePlayerActivity</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_activity_youtube_player">YoutubePlayer</string>
+    <string name="title_activity_games_list">Games</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">home</string>
+    <string name="games">games</string>
+    <string name="streamers">streamers</string>
+    <string name="freedom">freedom</string>
+    <string name="account">account</string>
+    <string name="title_activity_game_videos">GameVideosActivity</string>
+    <string name="title_activity_streamers_list">StreamersListActivity</string>
 </resources>

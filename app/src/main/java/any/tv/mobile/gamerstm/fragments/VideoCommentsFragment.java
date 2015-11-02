@@ -4,20 +4,19 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
 import java.util.List;
 
 import any.tv.mobile.gamerstm.R;
+import any.tv.mobile.gamerstm.models.Comment;
 import any.tv.mobile.gamerstm.models.Video;
 import retrofit.Call;
 import retrofit.Callback;
@@ -30,15 +29,15 @@ import retrofit.Response;
  * Use the {@link VideoDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class VideoDetailFragment extends BaseFragment {
+public class VideoCommentsFragment extends BaseFragment {
     private Video video;
 
-    public static VideoDetailFragment newInstance() {
-        VideoDetailFragment fragment = new VideoDetailFragment();
+    public static VideoCommentsFragment newInstance() {
+        VideoCommentsFragment fragment = new VideoCommentsFragment();
         return fragment;
     }
 
-    public VideoDetailFragment() {
+    public VideoCommentsFragment() {
         // Required empty public constructor
     }
 
@@ -48,11 +47,13 @@ public class VideoDetailFragment extends BaseFragment {
         if (getArguments() != null && getArguments().getSerializable("video") != null) {
             video = (Video) getArguments().getSerializable("video");
 
-            Call<Video> call = getGamersService().getVideoDetail(video.getVideo_id());
-            call.enqueue(new Callback<Video>() {
+            Log.d("VIDEOID", "" + video.getVideo_id());
+
+            Call<List<Comment>> call = getCommentsService().getVideoComments(video.getVideo_id());
+            call.enqueue(new Callback<List<Comment>>() {
                 @Override
-                public void onResponse(Response<Video> response) {
-                    displayData(response.body());
+                public void onResponse(Response<List<Comment>> response) {
+
                 }
 
                 @Override
@@ -67,7 +68,7 @@ public class VideoDetailFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_video_detail, container, false);
+        return inflater.inflate(R.layout.fragment_video_comments, container, false);
     }
 
     @Override
@@ -80,24 +81,6 @@ public class VideoDetailFragment extends BaseFragment {
 
     public void displayData(Video vid) {
         video = vid;
-        ((TextView) mainView.findViewById(R.id.videoDetail)).setText("" + vid.getDescription());
-
-        if (vid.getAvatar() == null) {
-            ((TextView) mainView.findViewById(R.id.nameTextView)).setText("" + vid.getOwner());
-            ((TextView) mainView.findViewById(R.id.likesTextView)).setText("Likes: " + vid.getLikes());
-            ((TextView) mainView.findViewById(R.id.viewsTextView)).setText("Views: " + vid.getViews());
-
-            Picasso.with(c)
-                    .load(vid.getUserImage())
-                    .into((ImageView) mainView.findViewById(R.id.userImage));
-        } else {
-            ((TextView) mainView.findViewById(R.id.nameTextView)).setText("" + vid.getUser());
-            ((TextView) mainView.findViewById(R.id.likesTextView)).setText("Likes: " + vid.getLikeCount());
-            ((TextView) mainView.findViewById(R.id.viewsTextView)).setText("Views: " + vid.getViewCount());
-
-            Picasso.with(c)
-                    .load(vid.getAvatar())
-                    .into((ImageView) mainView.findViewById(R.id.userImage));
-        }
+        //((TextView) mainView.findViewById(R.id.videoDetail)).setText(""+vid.getDescription());
     }
 }

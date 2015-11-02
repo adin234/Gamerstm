@@ -39,6 +39,13 @@ public class Video extends BaseModel {
     private String published_at;
     private boolean featured;
 
+    /*SOME THINGS THAT SHOULDNT BE HERE*/
+    private String avatar;
+    private String user;
+    private int viewCount;
+    private int likeCount;
+    private int commentCount;
+
     public Video() {}
 
     public String getGamers_mobile_android_id() {
@@ -161,6 +168,50 @@ public class Video extends BaseModel {
         this.engtitle = engtitle;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public int getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
     public View getView(final Context c, View convertView, ViewGroup parent) {
         View row = convertView;
         final Video self = this;
@@ -177,7 +228,7 @@ public class Video extends BaseModel {
 
         ((TextView) row.findViewById(R.id.titleText)).setText(this.getVideo_title());
         ((TextView) row.findViewById(R.id.ownerText)).setText(this.getOwner());
-        ((TextView) row.findViewById(R.id.viewsText)).setText(this.getViews()+ " Views |");
+        ((TextView) row.findViewById(R.id.viewsText)).setText(this.getViews()+ " Views");
         ((TextView) row.findViewById(R.id.commentsText)).setText(this.getComments() + " Comments");
 
         row.findViewById(R.id.shareButton).setOnClickListener((BaseActivity) c);
@@ -192,5 +243,9 @@ public class Video extends BaseModel {
 
 
         return row;
+    }
+
+    public String getUserImage() {
+        return "http://cdn2.gamers.tm/user_avatars/"+getOwner_id()+".jpg";
     }
 }

@@ -15,6 +15,7 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 
 import any.tv.mobile.gamerstm.R;
 import any.tv.mobile.gamerstm.adapters.VideoPageTabAdapter;
+import any.tv.mobile.gamerstm.fragments.VideoCommentsFragment;
 import any.tv.mobile.gamerstm.fragments.VideoDetailFragment;
 import any.tv.mobile.gamerstm.fragments.VideoSuggestionsFragment;
 import any.tv.mobile.gamerstm.models.Video;
@@ -56,7 +57,7 @@ public class YoutubePlayerActivity extends BaseActivity implements
 
         adapter = new FragmentPagerItemAdapter(getSupportFragmentManager(), FragmentPagerItems.with(this)
                 .add("Details", VideoDetailFragment.class, new Bundler().putSerializable("video", video).get())
-                .add("Comments", VideoDetailFragment.class)
+                .add("Comments", VideoCommentsFragment.class, new Bundler().putSerializable("video", video).get())
                 .add("Suggestions",  VideoSuggestionsFragment.class, new Bundler().putSerializable("video", video).get())
                 .create());
 
@@ -90,7 +91,9 @@ public class YoutubePlayerActivity extends BaseActivity implements
     public void onPause() {
         super.onPause();
 
-        youTubePlayer.release();
+        if (youTubePlayer!=null) {
+            youTubePlayer.release();
+        }
     }
 
     @Override
@@ -102,11 +105,5 @@ public class YoutubePlayerActivity extends BaseActivity implements
                     "YouTubePlayer.onInitializationFailure(): " + result.toString(),
                     Toast.LENGTH_LONG).show();
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem menuItem) {
-        onBackPressed();
-        return true;
     }
 }

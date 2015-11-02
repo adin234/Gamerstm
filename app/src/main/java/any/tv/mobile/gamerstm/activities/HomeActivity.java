@@ -116,11 +116,24 @@ public class HomeActivity extends BaseActivity {
     }
 
     public void getData() {
-        List<Slider> sliders = Slider.find(Slider.class, "1");
+        /*List<Slider> sliders = Slider.find(Slider.class, "1");
 
         if (sliders.size() > 0) {
             displaySlider(sliders);
-        }
+        }*/
+
+        Call<List<Slider>> sliders =  ((Application) getApplication()).getGamersService().sliders();
+        sliders.enqueue(new Callback<List<Slider>>() {
+            @Override
+            public void onResponse(Response<List<Slider>> response) {
+                displaySlider(response.body());
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
     }
 
     private void displaySlider(List<Slider> sliders) {

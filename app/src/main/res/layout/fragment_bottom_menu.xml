@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context="any.tv.mobile.gamerstm.fragments.BottomMenuFragment"
+    android:background="@drawable/border_top_grey">
+    <any.tv.mobile.gamerstm.customviews.TextViewDrawableSize
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/home"
+        android:drawableTop="@drawable/home_active_1"
+        style="@style/bottomMenuItem"
+        app:compoundDrawableHeight="@dimen/smallLogoHeight"
+        app:compoundDrawableWidth="@dimen/smallLogoWidth"
+        android:id="@+id/homeButton" />
+
+    <any.tv.mobile.gamerstm.customviews.TextViewDrawableSize
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/games"
+        android:drawableTop="@drawable/games_active_1"
+        style="@style/bottomMenuItem"
+        app:compoundDrawableHeight="@dimen/smallLogoHeight"
+        app:compoundDrawableWidth="@dimen/smallLogoWidth"
+        android:id="@+id/gamesButton" />
+
+    <any.tv.mobile.gamerstm.customviews.TextViewDrawableSize
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/streamers"
+        android:drawableTop="@drawable/live_active_1"
+        style="@style/bottomMenuItem"
+        app:compoundDrawableHeight="@dimen/smallLogoHeight"
+        app:compoundDrawableWidth="@dimen/smallLogoWidth"
+        android:id="@+id/streamersButton" />
+
+    <any.tv.mobile.gamerstm.customviews.TextViewDrawableSize
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/freedom"
+        android:drawableTop="@drawable/freedom_active_1"
+        style="@style/bottomMenuItem"
+        app:compoundDrawableHeight="@dimen/smallLogoHeight"
+        app:compoundDrawableWidth="@dimen/smallLogoWidth"
+        android:id="@+id/freedomButton" />
+
+    <any.tv.mobile.gamerstm.customviews.TextViewDrawableSize
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/account"
+        android:drawableTop="@drawable/user_active_1"
+        style="@style/bottomMenuItem"
+        app:compoundDrawableHeight="@dimen/smallLogoHeight"
+        app:compoundDrawableWidth="@dimen/smallLogoWidth"
+        android:id="@+id/accountButton" />
+</LinearLayout>
