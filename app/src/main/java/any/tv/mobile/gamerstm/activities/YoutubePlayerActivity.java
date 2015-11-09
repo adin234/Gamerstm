@@ -1,11 +1,13 @@
 package any.tv.mobile.gamerstm.activities;
 
 import android.app.ActionBar;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -26,7 +28,7 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 public class YoutubePlayerActivity extends BaseActivity implements
         YouTubePlayer.OnInitializedListener {
-    public static final String API_KEY = "AIzaSyChNs1FHSFVJ7EdOBJdR0mGuIRxCbtyMyU";
+    public String API_KEY;
 
     private static final int RQS_ErrorDialog = 1;
 
@@ -45,6 +47,8 @@ public class YoutubePlayerActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube_player);
+
+        API_KEY = getResources().getString(R.string.GOOGLE_API_KEY);
 
         youTubePlayerFragment = (YouTubePlayerFragment) getFragmentManager()
                 .findFragmentById(R.id.youtubeplayerfragment);
@@ -104,6 +108,19 @@ public class YoutubePlayerActivity extends BaseActivity implements
             Toast.makeText(this,
                     "YouTubePlayer.onInitializationFailure(): " + result.toString(),
                     Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Log.d("THIS IS STUPID", "NO?");
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            getSupportActionBar().hide();
+        } else {
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            getSupportActionBar().show();
         }
     }
 }

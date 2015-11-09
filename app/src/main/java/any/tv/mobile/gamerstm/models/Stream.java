@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.io.Serializable;
+
 import any.tv.mobile.gamerstm.R;
 
 /**
@@ -120,7 +122,7 @@ public class Stream extends BaseModel {
         this.about = about;
     }
 
-    public class Thumbnail {
+    public class Thumbnail implements Serializable {
         private String medium;
         private String large;
 

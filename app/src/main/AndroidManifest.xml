@@ -44,7 +44,25 @@
         </activity>
         <activity
             android:name=".activities.StreamersListActivity"
-            android:label="@string/title_activity_streamers_list">
+            android:label="@string/title_activity_streamers_list" >
+        </activity>
+        <activity android:name=".activities.TwitchStreamActivity"
+            android:configChanges="orientation|screenSize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="any.tv.mobile.gamerstm.activities.StreamersListActivity" />
+        </activity>
+        <activity android:name=".activities.YoutubeStreamActivity"
+            android:configChanges="orientation|screenSize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="any.tv.mobile.gamerstm.activities.StreamersListActivity" />
+        </activity>
+        <activity android:name=".activities.HitboxStreamActivity"
+            android:configChanges="orientation|screenSize">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="any.tv.mobile.gamerstm.activities.StreamersListActivity" />
         </activity>
     </application>
 
